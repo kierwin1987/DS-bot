@@ -41,44 +41,7 @@ bot.on('ready',function() {
 	console.log('Logged in as %s - %s\n',bot.username, bot.id);
 });
 
-//odpovědi na zprávy
-bot.on('message', function(user, userID, channelID, message, event) {
-if (message === "Michal je bůh") {
-	bot.sendMessage({
-		to: channelID,
-		message: "Hovno bůh!"
-	});
-}
-});
-
-bot.on('message', function(user, userID, channelID, message, event) {
-if (message === "facepalm") {
-	bot.sendMessage({
-		to: channelID,
-		message: "https://media.giphy.com/media/NaKGiq4wAmi0E/giphy.gif"
-	});
-}
-});
-
-bot.on('message', function(user, userID, channelID, message, event) {
-if (message === "Zdar") {
-	bot.sendMessage({
-		to: channelID,
-		message: "Zahrajeme World of Warships?"
-	});
-}
-});
-
-bot.on('message', function(user, userID, channelID, message, event) {
-if (message === "Ahoj") {
-	bot.sendMessage({
-		to: channelID,
-		message: "Nechť tě skolí mor a cholera!"
-	});
-}
-});
-
-//Zkouška notifikace
+//zkouška notifikace
 bot.on('notification',function(user, userID, channelID, message, ) {
 	if (notification === user.joinvoicechannel) {
 		bot.sendMessage({
