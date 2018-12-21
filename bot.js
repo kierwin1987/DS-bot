@@ -42,7 +42,7 @@ bot.on('ready',function() {
 });
 
 //zkouška notifikace
-bot.on('notification',function(user, userID, channelID, message, ) {
+bot.on('notification',function(user, userID, channelID, message) {
 	if (notification === user.joinvoicechannel) {
 		bot.sendMessage({
 		to: 497145169817239592,
