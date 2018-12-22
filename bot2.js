@@ -128,13 +128,13 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-  if (message.content === 'Michal je satan"') {
+  if (message.content === 'Michal je satan') {
     message.channel.send('https://i.imgur.com/B8GGZFM.jpg');
   }
 });
 
 client.on('message', message => {
-  if (message.content === 'Já čekám"') {
+  if (message.content === 'Já čekám') {
     message.channel.send('https://media.giphy.com/media/SmpV6sKa1vBxm/giphy.gif');
   }
 });
