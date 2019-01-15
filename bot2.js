@@ -1,12 +1,19 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-client.login('Token');
-require('events').EventEmitter.defaultMaxListeners = 35;
+const CLEAR_MESSAGES = '!clearMessages';
+client.login('token');
+
 
 client.on('ready', () => {
   console.log('I am ready!');
 });
 
+//game presence/activity
+client.on('ready', () => {
+    client.user.setActivity("si s Michalem")
+});
+
+//odpovědi na zprávy
 client.on('message', message => {
   if (message.content === 'ping') {
     message.channel.send('pong');
@@ -14,15 +21,15 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-  if (message.content === 'fuck you') {
-    message.channel.send('https://media.giphy.com/media/d2jfPv6CUzpopfLa/giphy.gif');
+  if (message.content === '!pozvánka') {
+    message.channel.send('https://discord.gg/jxYaSJj!');
   }
 });
 
 client.on('message', message => {
-    if (message.content === '!rip') {
-      message.channel.send('https://i.imgur.com/w3duR07.png');
-    }
+  if (message.content === 'fuck you') {
+    message.channel.send('https://media.giphy.com/media/d2jfPv6CUzpopfLa/giphy.gif');
+  }
 });
 
 client.on('message', message => {
@@ -51,7 +58,7 @@ client.on('message', message => {
 
 client.on('message', message => {
   if (message.content === 'dafuq') {
-    message.channel.send('https://media.tenor.com/images/37d7671635032a538662be1f3295326d/tenor.gif');
+    message.channel.send('https://thumbs.gfycat.com/AcidicFlickeringCobra-small.gif');
   }
 });
 
@@ -128,12 +135,6 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-  if (message.content === 'Michal je satan') {
-    message.channel.send('https://i.imgur.com/B8GGZFM.jpg');
-  }
-});
-
-client.on('message', message => {
   if (message.content === 'Já čekám') {
     message.channel.send('https://media.giphy.com/media/SmpV6sKa1vBxm/giphy.gif');
   }
@@ -145,3 +146,97 @@ client.on('message', message => {
   }
 });
 
+client.on('message', message => {
+  if (message.content === 'Honza je bůh') {
+    message.channel.send('https://i.ytimg.com/vi/BshH5rZuMC4/maxresdefault.jpg');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'Michale, kde je ta loď?') {
+    message.channel.send('https://media.giphy.com/media/hTh9bSbUPWMWk/200.webp');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'Vláďa je bůh') {
+    message.channel.send('Smrt si přichází pro tebe, Vláďíku!\nhttps://i.pinimg.com/originals/4f/ec/6b/4fec6b58f25306230f45365f85296665.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'Slunění se na sluníčku') {
+    message.channel.send('https://i.pinimg.com/originals/6d/2c/90/6d2c908504367c225273645ecbdfb998.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'rum?') {
+    message.channel.send('https://media.tenor.com/images/1583c520a04015926338d5fa1b2666a6/tenor.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'Rum?') {
+    message.channel.send('https://media.tenor.com/images/1583c520a04015926338d5fa1b2666a6/tenor.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'room?') {
+    message.channel.send('https://i.gifer.com/IabK.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'roomka?') {
+    message.channel.send('https://i.gifer.com/IabK.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'Honzo, kde je ta loď?') {
+    message.channel.send('Moment, zaměřuji!\nhttps://thumbs.gfycat.com/EsteemedPettyCockatoo-small.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'Vláďo, vidíš tu loď?') {
+    message.channel.send('https://thumbs.gfycat.com/PlainImperturbableHarborseal-small.gif\nMám malý dalekohled :cry:');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'Ahoj') {
+    message.channel.send('https://media.giphy.com/media/FmBhzktIjvdZe/200.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'kill secured') {
+    message.channel.send('https://media.giphy.com/media/ihVhvTGjasuha/giphy.gif');
+  }
+});
+
+client.on('message', message => {
+  if (message.content === 'Honzo, vidíš tu loď?') {
+    message.channel.send('Zaostřím a uvidím nádherně\nhttps://i.imgur.com/yyTWgyL.gif');
+  }
+});
+
+//zkouška notifikace
+bot.on('voiceStateUpdate', (oldMember, newMember) => {
+  let newUserChannel = newMember.voiceChannel
+  let oldUserChannel = oldMember.voiceChannel
+
+
+  if(oldUserChannel === undefined && newUserChannel !== undefined) {
+
+     // User Joins a voice channel
+
+  } else if(newUserChannel === undefined){
+
+    // User leaves a voice channel
+
+  }
+})
