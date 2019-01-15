@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const CLEAR_MESSAGES = '!clearMessages';
-client.login('token');
+client.login('Token');
 
 
 client.on('ready', () => {
@@ -223,20 +223,3 @@ client.on('message', message => {
     message.channel.send('Zaostřím a uvidím nádherně\nhttps://i.imgur.com/yyTWgyL.gif');
   }
 });
-
-//zkouška notifikace
-bot.on('voiceStateUpdate', (oldMember, newMember) => {
-  let newUserChannel = newMember.voiceChannel
-  let oldUserChannel = oldMember.voiceChannel
-
-
-  if(oldUserChannel === undefined && newUserChannel !== undefined) {
-
-     // User Joins a voice channel
-
-  } else if(newUserChannel === undefined){
-
-    // User leaves a voice channel
-
-  }
-})
