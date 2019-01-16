@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const CLEAR_MESSAGES = '!clearMessages';
-client.login('NDk2ODA2MDUyMTI2NTIzNDIy.Dv8Fow.IhDy4MEHGcwVaxxKOZ-ITrMNfdI');
+client.login('Token');
 
 
 client.on('ready', () => {
