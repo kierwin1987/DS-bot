@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const CLEAR_MESSAGES = '!clearMessages';
-client.login('Token');
+client.login('NDk2ODA2MDUyMTI2NTIzNDIy.Dv8Fow.IhDy4MEHGcwVaxxKOZ-ITrMNfdI');
 
 
 client.on('ready', () => {
@@ -12,6 +12,16 @@ client.on('ready', () => {
 client.on('ready', () => {
     client.user.setActivity("si s Michalem")
 });
+
+//auto role
+client.on("guildMemberAdd", function(member) {
+    let role = member.guild.roles.find("name", "User");
+    member.addRole(role).catch(console.error);
+});
+
+//role
+
+
 
 //odpovědi na zprávy
 client.on('message', message => {
@@ -223,3 +233,4 @@ client.on('message', message => {
     message.channel.send('Zaostřím a uvidím nádherně\nhttps://i.imgur.com/yyTWgyL.gif');
   }
 });
+
