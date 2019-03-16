@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-client.login(token);
+client.login('NDk2ODA2MDUyMTI2NTIzNDIy.Dv8Fow.IhDy4MEHGcwVaxxKOZ-ITrMNfdI');
 
 client.on('ready', () => {
   console.log('I am ready!');
@@ -213,6 +213,9 @@ client.on('message', message => {
       }
     ]
 }	});
+	}
+	if (message.content === 'Chytnu tě!') {
+		message.reply('beep, beep!\nhttps://i.pinimg.com/originals/f2/97/68/f29768a83d196e199673b89c22ec4fb5.gif');
 	}
 	});
 
