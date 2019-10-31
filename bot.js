@@ -1,271 +1,256 @@
 const Discord = require('discord.js');
+const fetch = require('node-fetch');
 const client = new Discord.Client();
-client.login(token);
+client.login('Token');
 
 client.on('ready', () => {
-  console.log('I am ready!');
+	var generalChannel = client.channels.get("497145169817239592")
+	generalChannel.send({files: ["https://media.giphy.com/media/xiqYaqo9e2f8uZxYTm/giphy.gif"]})
 });
+
+//Add emoji name
+var emojiname = ["WOT","ARK"];
+
+//Add role name
+var rolename=["WoT","ARK"];
 
 //game presence/activity
 client.on('ready', () => {
-    client.user.setActivity("si s Michalem")
+	client.user.setActivity("poker");
 });
 
-//auto role
+
+//reaction role 
+client.on('message', msg => {
+	if(msg.content.startsWith("!reaction")){
+	const embed = new Discord.RichEmbed();
+	embed.setTitle('Role reaction');
+	embed.setTimestamp();
+	embed.setColor('#00FF00');
+	embed.addField("Role k přidání:","Pro World of Tanks a pro ARK Survival Evolved.");
+	embed.addField("Fungování:","Stačí jen kliknout na reakci k dané ikoně hry u zprávy výše. Tím si přídáte, či odebere roli.");
+	msg.channel.send({embed});
+	if(!msg.channel.guild) return;
+	for(let n in emojiname){
+		var emoji =[msg.guild.emojis.find(r => r.name == emojiname[n])];
+		for(let i in emoji){
+			msg.react(emoji[i]);
+		}
+	}
+	}
+});
+
+client.on("messageReactionAdd",(reaction,user)=>{
+    if(!user) return;
+    if(user.bot)return;
+    if(!reaction.message.channel.guild) return;
+    for(let n in emojiname){
+    if(reaction.emoji.name == emojiname[n]){
+      let role = reaction.message.guild.roles.find(r => r.name == rolename[n]);          
+      reaction.message.guild.member(user).addRole(role).catch(console.error);
+    }
+  }
+  });
+
+client.on("messageReactionRemove",(reaction,user)=>{
+    if(!user) return;
+    if(user.bot)return;
+    if(!reaction.message.channel.guild) return;
+    for(let n in emojiname){
+    if(reaction.emoji.name == emojiname[n]){
+      let role = reaction.message.guild.roles.find(r => r.name == rolename[n]);   
+      reaction.message.guild.member(user).removeRole(role).catch(console.error);
+    }
+    }
+  });
+
+
+//autorole
 client.on("guildMemberAdd", function(member) {
-    let role = member.guild.roles.find("name", "Member");
-    member.addRole(role).catch(console.error);
+	let role = member.guild.roles.find("name", "Member");
+	member.addRole(role).catch(console.error);
+});
+
+//welcome message
+client.on('guildMemberAdd', member => {
+	member.guild.channels.get('494528283308851220').send('Greetings, sir '+ member.user+'.');
+});
+
+//leave message
+client.on('guildMemberRemove', member => {
+	member.guild.channels.get('497145169817239592').send(member.user+' odešel od nás.');
 });
 
 //odpovědi na zprávy
 client.on('message', message => {
-	if (message.content === 'ping') {
-    message.channel.send('pong');
-	}
 	if (message.content === '!pozvánka') {
-    message.channel.send('https://discord.gg/jxYaSJj!');
-	}
-	if (message.content === 'fuck you') {
-    message.channel.send('https://media.giphy.com/media/d2jfPv6CUzpopfLa/giphy.gif');
-	}
-	if (message.content === 'wtf?!?') {
-    message.channel.send('https://media.giphy.com/media/aZ3LDBs1ExsE8/giphy.gif');
-	}
-	if (message.content === 'what the fuck?') {
-    message.channel.send('https://media.giphy.com/media/oKQHP89vJTUnm/source.gif');
-	}
-	if (message.content === 'Michal je bůh') {
-    message.channel.send('Hovno bůh! Je to krampus!\nhttps://cdn.japantimes.2xx.jp/wp-content/uploads/2017/12/f-krampus-a-20171209-870x586.jpg');
-	}
-	if (message.content === 'dafuq') {
-    message.channel.send('https://thumbs.gfycat.com/AcidicFlickeringCobra-small.gif');
-	}
-	if (message.content === 'lol') {
-    message.channel.send('https://media.giphy.com/media/O5NyCibf93upy/giphy.gif');
-	}
-	if (message.content === 'ježíš') {
-    message.channel.send('https://ih0.redbubble.net/image.426448139.5540/ap,550x550,12x16,1,transparent,t.u5.png');
-	}
-	if (message.content === 'Jesus!') {
-    message.channel.send('https://i.imgur.com/X7ETbDU.gif');
-	}
-	if (message.content === 'why not') {
-    message.channel.send('https://media.giphy.com/media/3d2wgrPNcBqocFzFbJ/giphy.gif');
-	}
-	if (message.content === 'why not?') {
-    message.channel.send('https://media.giphy.com/media/3d2wgrPNcBqocFzFbJ/giphy.gif');
-	}
-	if (message.content === 'meepo team dance') {
-    message.channel.send('https://thumbs.gfycat.com/AmazingGrizzledLaughingthrush-size_restricted.gif');
-	}
-	if (message.content === 'nice') {
-    message.channel.send('https://media.tenor.com/images/ffc13fce77b6382023968b8518cb0c49/tenor.gif');
-	}
-	if (message.content === 'facepalm') {
-    message.channel.send('https://media1.tenor.com/images/830800d4e0fc56b7fd6ccf465c9575fc/tenor.gif');
-	}
-	if (message.content === 'banhammer') {
-    message.channel.send('https://i.imgur.com/WOjy315.gif');
-	}
-	if (message.content === 'Zapal si') {
-    message.channel.send('https://media1.tenor.com/images/02090871c75cbef4e11b88f99f2ee782/tenor.gif');
-	}
-	if (message.content === 'a chytej!') {
-    message.channel.send('https://i.makeagif.com/media/9-14-2015/1oH5R4.gif');
-	}
-	if (message.content === 'No Vláďo!') {
-    message.channel.send('https://66.media.tumblr.com/54d3fd2bf115f3454f4155a3a24cde8d/tumblr_o2pm17shNZ1v8amego1_400.gif');
-	}
-	if (message.content === 'Já čekám') {
-    message.channel.send('https://media.giphy.com/media/SmpV6sKa1vBxm/giphy.gif');
-	}
-	if (message.content === 'oh, kurva') {
-    message.channel.send('https://i.kym-cdn.com/photos/images/newsfeed/001/060/693/c98.gif');
-	}
-	if (message.content === 'Honza je bůh') {
-    message.channel.send('https://i.ytimg.com/vi/BshH5rZuMC4/maxresdefault.jpg');
-	}
-	if (message.content === 'Michale, kde je ta loď?') {
-    message.channel.send('https://media.giphy.com/media/hTh9bSbUPWMWk/200.webp');
-	}
-	if (message.content === 'Vláďa je bůh') {
-    message.channel.send('Smrt si přichází pro tebe, Vláďíku!\nhttps://i.pinimg.com/originals/4f/ec/6b/4fec6b58f25306230f45365f85296665.gif');
-	}
-	if (message.content === 'Slunění se na sluníčku') {
-    message.channel.send('https://i.pinimg.com/originals/6d/2c/90/6d2c908504367c225273645ecbdfb998.gif');
-	}
-	if (message.content === 'rum?') {
-    message.channel.send('https://media.tenor.com/images/1583c520a04015926338d5fa1b2666a6/tenor.gif');
-	}	
-	if (message.content === 'Rum?') {
-    message.channel.send('https://media.tenor.com/images/1583c520a04015926338d5fa1b2666a6/tenor.gif');
-	}
-	if (message.content === 'room?') {
-    message.channel.send('https://i.gifer.com/IabK.gif');
-	}
-	if (message.content === 'roomka?') {
-    message.channel.send('https://i.gifer.com/IabK.gif');
-	}
-	if (message.content === 'Honzo, kde je ta loď?') {
-    message.channel.send('Moment, zaměřuji!\nhttps://thumbs.gfycat.com/EsteemedPettyCockatoo-small.gif');
-	}
-	if (message.content === 'Vláďo, vidíš tu loď?') {
-    message.channel.send('https://thumbs.gfycat.com/PlainImperturbableHarborseal-small.gif\nMám malý dalekohled :cry:');
-	}
-	if (message.content === 'kill secured') {
-    message.channel.send('https://media.giphy.com/media/ihVhvTGjasuha/giphy.gif');
-	}
-	if (message.content === 'LOL') {
-	message.channel.send('https://thumbs.gfycat.com/DefinitiveAdeptAquaticleech-size_restricted.gif');
-	}
-	if (message.content === 'lmao') {
-	message.channel.send('https://thumbs.gfycat.com/CourageousCreativeBullmastiff-size_restricted.gif');
-	}
-	if (message.content === 'You have been banhammered') {
-	message.channel.send('https://media1.tenor.com/images/11baffb759ae7ca9d984153cf53a7768/tenor.gif');
-	}
-	if (message.content === 'Cheers') {
-    message.channel.send('https://i.gifer.com/LAeE.gif');
-	}
-	if (message.content === 'Honzo, vidíš tu loď?') {
-    message.channel.send('Zaostřím a uvidím nádherně\nhttps://i.imgur.com/yyTWgyL.gif');
-	}
-	if (message.content === 'Ahoj') {
-    message.channel.send('https://media.giphy.com/media/FmBhzktIjvdZe/200.gif');
-	}
-	if (message.content === 'I don\'t give a fuck') {
-	message.channel.send('http://i45.tinypic.com/cnx2x.gif');
-	}
-	if (message.content === 'blowjob?') {
-		message.channel.send('https://i.imgur.com/VEbmoWU.gif?');
-	}
-	if (message.content === 'let\'s get sexy!') {
-		message.channel.send('https://media.tenor.com/images/7c27472f3eb2c0e50c6aace9c7c40164/tenor.gif');
-	}
-	if (message.content === 'brečík') {
-		message.channel.send('https://media.giphy.com/media/xUPGchm5uhJFcZacta/giphy.gif');
-	}
-	if (message.content === 'Give me a hug.') {
-		message.channel.send('https://media.giphy.com/media/4rGpCAtyTfwHu/giphy.gif');
-	}
-	if (message.content === '!ETS2') {
-		message.channel.send({ embed: {
-  "title": "Hnilička Transport",
-  "description": "Virtuální přepravní společnost zabívající se přepravou Plachtové a ADR, podvalů a nadměrů",
-  "url": "http://hnilitrans.cesmadcs.eu/",
-  "color": 2829025,
-  "thumbnail": {
-    "url": "http://cesmadcs.eu/img/p/6/4/7/647-thickbox_default.jpg"
-  },
-  "author": {
-    "name": "kierwin1987",
-    "icon_url": "https://cdn.discordapp.com/avatars/260405223409844224/e81e524dcef3f17746ce27c6d3ece98d.png?size=2048"
-  },
-  "fields": [
-    {
-      "name": "Vedení firmy:",
-      "value": "Kierwin1987 - Majitel firmy a dispečer ADR, podvalů a nadměrných přepravy"
-    },
-    {
-      "name": "Dispečink:",
-      "value": "Miry2003 - Dispečer plachtové přepravy"
-    },
-    {
-      "name": "Pravidla:",
-      "value": "Dodržování 561/2006, [pravidla TMP](https://truckersmp.com/rules) a pravidla silničního provozu."
-    }
-  ]
-} });
+		message.channel.send('https://discord.gg/jxYaSJj!');
 	}
 	if (message.content === '!ARK') {
-		message.channel.send({embed: {
-    "color": 5159171,
-    "thumbnail": {
-      "url": "https://cdn2.unrealengine.com/Diesel/product/ark/ark_logo_2018-387x322-e5210b521deb62a7129c70840935bf7779feeb69.png"
-    },
-    "image": {
-      "url": "http://www.fakaheda.eu/logo/wide_green_white_transparent.png"
-    },
-    "author": {
-      "name": "Kierwin1987",
-      "icon_url": "https://cdn.discordapp.com/avatars/260405223409844224/e81e524dcef3f17746ce27c6d3ece98d.png?size=2048"
-    },
-    "fields": [
-      {
-        "name": "ARK Survival Evolved server",
-        "value": "[Oficiální WIKI pro ARK](https://ark.gamepedia.com/ARK_Survival_Evolved_Wiki)"
-      },
-      {
-        "name": "IP serveru:",
-        "value": "82.208.17.60:27901(Přes server na steamu 82.208.17.60:28901)"
-      },
-	  {
-		 "name": "Jméno serveru",
-		 "value": "[CZ/SK] ARK Jurastic world"
-	  },
-      {
-        "name": "Mapa:",
-        "value": "[Ragnarok - ARK Expansion Map](https://store.steampowered.com/app/642250/Ragnarok__ARK_Expansion_Map/)"
-      },
-      {
-       "name": "Módy:",
-       "value": "[Automated Ark 2.51](https://steamcommunity.com/sharedfiles/filedetails/?id=812655342),[Bore Water Kit](https://steamcommunity.com/sharedfiles/filedetails/?id=730794403),[Classic Flyers](https://steamcommunity.com/sharedfiles/filedetails/?id=895711211),[Upgrade Station v1.8i](https://steamcommunity.com/sharedfiles/filedetails/?id=821530042),[Super Tranq Rifle](https://steamcommunity.com/sharedfiles/filedetails/?id=686599588),[Structures Plus](https://steamcommunity.com/sharedfiles/filedetails/?id=731604991),[Capitalism Currency](https://steamcommunity.com/sharedfiles/filedetails/?id=747539326),[Capitalism NPC Trader](https://steamcommunity.com/sharedfiles/filedetails/?id=873746971),[Capitalism Player Trader](https://steamcommunity.com/sharedfiles/filedetails/?id=873749349)"
-      }
-    ]
-}	});
+		const embed = new Discord.RichEmbed();
+		embed.setTitle('ARK info');
+		embed.setTimestamp();
+		embed.setColor('#00FF00');
+		embed.setThumbnail('https://cdn2.unrealengine.com/Diesel/product/ark/ark_logo_2018-387x322-e5210b521deb62a7129c70840935bf7779feeb69.png');
+		embed.setImage('http://www.fakaheda.eu/logo/wide_green_white_transparent.png');
+		embed.addField("ARK Survival Evolved server","[Oficiální WIKI pro ARK](https://ark.gamepedia.com/ARK_Survival_Evolved_Wiki)");
+		embed.addField("Server je hostován u Fakahedy.","[www.fakaheda.eu](https://www.fakaheda.eu/)");
+		embed.addField("IP serveru:", "82.208.17.60:27901(Přes server na steamu 82.208.17.60:28901)");
+		embed.addField("Jméno serveru:", "[CZ/SK] ARK Jurastic world - Private server");
+		embed.addField("Expiruje:", "21. 11. 2019");
+		embed.addField("Automatický restart serveru:","Každý den cca v 5:28");
+		embed.addField("Mapa:", "[Ragnarok - ARK Expansion Map](https://store.steampowered.com/app/642250/Ragnarok__ARK_Expansion_Map/)");
+		embed.addField("Módy:", "[Crafted Element](https://steamcommunity.com/sharedfiles/filedetails/?id=944235662),[Bore Water Kit](https://steamcommunity.com/sharedfiles/filedetails/?id=730794403),[Classic Flyers](https://steamcommunity.com/sharedfiles/filedetails/?id=895711211),[Super Tranq Rifle](https://steamcommunity.com/sharedfiles/filedetails/?id=686599588),[Structures Plus](https://steamcommunity.com/sharedfiles/filedetails/?id=731604991),[Automated Ark](https://steamcommunity.com/sharedfiles/filedetails/?id=812655342),[Upgrade Station v1.8i](https://steamcommunity.com/sharedfiles/filedetails/?id=821530042)");
+		message.delete().catch(o=>{});
+		message.channel.send({embed});
+	};
+	if (message.content === 'dafuq') {
+		message.channel.send({files: ["https://thumbs.gfycat.com/AcidicFlickeringCobra-small.gif"]});
 	}
-	if (message.content === 'Chytnu tě!') {
-		message.reply('beep, beep!\nhttps://i.pinimg.com/originals/f2/97/68/f29768a83d196e199673b89c22ec4fb5.gif');
+	if (message.content === 'Najdi tank') {
+		message.channel.send("https://media.giphy.com/media/hTh9bSbUPWMWk/200.webp");
 	}
+	if (message.content === 'why not') {
+		message.channel.send({files: ["https://i.imgur.com/nY1SVr7.gif"]});
+	}
+	if (message.content === 'Spáchal jsi zločiny!') {
+		message.channel.send('You have committed crimes against Skyrim and her people. What say you in your defense?', {files: ["./images/maxresdefault.jpg"]});
+	}
+	if (message.content === 'why not?') {
+		message.channel.send({files: ["https://i.imgur.com/nY1SVr7.gif"]});
+	}
+	if (message.content === 'facepalm') {
+		message.channel.send({files: ["https://media1.tenor.com/images/830800d4e0fc56b7fd6ccf465c9575fc/tenor.gif"]});
+	}
+	if (message.content === 'banhammer') {
+		message.channel.send({files: ["https://i.imgur.com/WOjy315.gif"]});
+	}
+	if (message.content === 'Zapal si') {
+		message.channel.send({files: ["https://media1.tenor.com/images/02090871c75cbef4e11b88f99f2ee782/tenor.gif"]});
+	}
+	if (message.content === 'a chytej!') {
+		message.channel.send({files: ["https://i.makeagif.com/media/9-14-2015/1oH5R4.gif"]});
+	}
+	if (message.content === 'kill secured') {
+		message.channel.send({files: ["https://media.giphy.com/media/ihVhvTGjasuha/giphy.gif"]});
+	}
+	if (message.content === 'LOL') {
+		message.channel.send({files: ["https://thumbs.gfycat.com/DefinitiveAdeptAquaticleech-size_restricted.gif"]});
+	}
+	if (message.content === 'meepo team dance') {
+		message.channel.send({files: ["https://thumbs.gfycat.com/AmazingGrizzledLaughingthrush-size_restricted.gif"]});
+	}
+	if (message.content === '!TS3') {
+		let embed = new Discord.RichEmbed();
+		embed.setTitle('Záložní TS3 server');
+		embed.setTimestamp();
+		embed.setColor('#0000FF');
+		embed.setThumbnail('http://thespiritualsphere.com/wp-content/uploads/2010/09/ts3_logo.png');
+		embed.addField("Záložní TS3 server v případě výpadku Discord služeb.", "Adresa: 37.205.12.96");
+		embed.addField("Další informace","Na serveru je nastavené heslo. Link pro připojení ");
+		message.delete().catch(o=>{});
+		message.channel.send({embed})
+	}
+	if (message.content === '!ARKStatus') {
+		const queryUrl = ["http://query.fakaheda.eu/82.208.17.60:27901.feed"];
+		let onlineMsg = "";
+		queryUrl.forEach(url => {
+			fetch(url).then(response => {
+				return response.json();
+				}).then(data => {
+					// Work with JSON data here
+					// console.log(data);
+		let embed = new Discord.RichEmbed();
+		embed.setTitle(data.hostname + " Server status");
+		embed.setTimestamp();
+		embed.setColor('#FF0000');
+		embed.addField("Server status", data.status);
+		embed.addField("Mapa", data.map);
+		embed.addField("Slots", data.slots, true);
+		embed.addField("Online", data.players, true);
+		if (data.players>0) {
+			onlineMsg = "";
+			data.players_list.forEach(element => {
+				onlineMsg += ""+element.name+", ";
+				});
+		embed.addField("Online players", onlineMsg);
+		}
+		message.delete().catch(o=>{});
+		message.channel.send({embed});
+		}).catch(err => {
+		message.delete().catch(o=>{});
+		console.log(err);
+		// Do something for an error here
+		//onlineMsg = "Failed to query the server. You can try later. Sorry."
+		let embed = new Discord.RichEmbed();
+		embed.setTitle("Error").setTimestamp().setDescription("Failed to query the server. Try again later. Sorry.");
+		embed.addField("Error", err);
+		message.channel.send({embed});
+		});
 	});
+	}
+});
+
+//getAvatar
+client.on('message', message => {
+	if (!message.guild) return;
+	if (message.content.startsWith('!getAvatar')) {
+		const user = message.mentions.users.first();
+		if (user) {
+		message.channel.send('Here is avatar of '+user.toString()+' : '+user.avatarURL );
+		}
+		else {
+			message.channel.send('Here is your Avatar : '+message.author.avatarURL);
+		}
+	}
+});
 
 //ban
 client.on('message', message => {
-    if (!message.guild) return;
-  if (message.content.startsWith('!ban')) {
-    const user = message.mentions.users.first();
-    if (user) {
-      const member = message.guild.member(user);
-	  if (!message.member.hasPermission("BAN_MEMBERS")) return message.reply('Insufficient Permission');
-      if (member) {
-        member.ban({
-          reason: 'Ban has been deserved!',
-        }).then(() => {
-          message.channel.send(user.toString()+'banhammer has spoken\nhttps://i.imgur.com/Nziie7u.gif');
-            }).catch(err => {
-                message.reply('nebyl jsem schopen použítí banovacího nástroje k ' + user.toString()+', protože nemám tak velké kladivo, jako má '+user.toString()+'.');
-          console.error(err);
-        });
-      } else {
-        message.reply(user.toString()+'není na tomto serveru');
-      }
-    } else {
-      message.reply('neoznačil jsi uživatele k použítí banovacího nástroje');
-    }
-  }
+	if (!message.guild) return;
+		if (message.content.startsWith('!ban')) {
+		const user = message.mentions.users.first();
+		if (user) {
+			const member = message.guild.member(user);
+			if(!message.member.hasPermission("BAN_MEMBERS")) return errors.noPerms(message, "BAN_MEMBERS");
+			if (member) {
+				member.ban({
+					reason: 'Ban has been deserved!',
+					}).then(() => {
+						message.channel.send(user.toString()+' byl trvale vykázán z těchto prostor.');
+						}).catch(err => {
+							message.reply('Bohužel ' + user.toString()+' má silné zdroje stříbra a zlata, které si rozdělujeme rovným dílem. Proto ho tu nechám.');
+							console.error(err);
+							});
+			} else {
+				message.reply(user.toString()+' není v těchto prostorách');
+				}
+		} else {
+		message.reply('neoznačil jsi zloducha k vypovězení!');
+		}
+	}
 });
 
 //kick
 client.on('message', message => {
-    if (!message.guild) return;
-  if (message.content.startsWith('!kick')) {
-    const user = message.mentions.users.first();
-    if (user) {
-      const member = message.guild.member(user);
-	  if (!message.member.hasPermission("KICK_MEMBERS")) return message.reply('Insufficient Permission');
-      if (member) {
-        member.kick('').then(() => {
-          message.reply(user.toString()+' byl úspěšně vykopnut.\nNebo byl nakopnut? https://media.giphy.com/media/ylp4hl9xEaWyc/200.gif');
-        }).catch(err => {
-            message.reply('nebyl jsem schopen nakopnout ' + user.toString());
-          console.error(err);
-        });
-      } else {
-          message.reply(user.toString() + ' není na tomto serveru');
-      }
-    } else {
-      message.reply('neoznačil jsi uživatele k nakopnutí');
-    }
-  }
+	if (!message.guild) return;
+	if (message.content.startsWith('!kick')) {
+		const user = message.mentions.users.first();
+		if (user) {
+			const member = message.guild.member(user);
+			if(!message.member.hasPermission("KICK_MEMBERS")) return errors.noPerms(message, "KICK_MEMBERS");
+			if (member) {
+				member.kick('').then(() => {
+					message.reply(user.toString()+' byl vykázán z těchto prostor.');
+					}).catch(err => {
+						message.reply('Bohužel ' + user.toString()+' má silné zdroje stříbra a zlata, které si rozdělujeme rovným dílem. Proto ho tu nechám.');
+						console.error(err);
+						});
+				} else {
+			message.reply(user.toString() + ' není v těchto prostorách');
+		}
+	} else {
+		message.reply('neoznačil jsi zloducha k vypovězení!');
+		}
+	}
 });
-
