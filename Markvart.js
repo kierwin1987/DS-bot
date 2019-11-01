@@ -147,7 +147,7 @@ client.on('message', message => {
 		embed.setColor('#0000FF');
 		embed.setThumbnail('http://thespiritualsphere.com/wp-content/uploads/2010/09/ts3_logo.png');
 		embed.addField("Záložní TS3 server v případě výpadku Discord služeb.", "Adresa: 37.205.12.96");
-		embed.addField("Další informace","Na serveru je nastavené heslo. Link pro připojení ");
+		embed.addField("Další informace","Na serveru je nastavené heslo.");
 		message.delete().catch(o=>{});
 		message.channel.send({embed})
 	}
