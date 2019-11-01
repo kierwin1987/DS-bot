@@ -17,5 +17,19 @@ async def on_message(message):
 	elif message.content == "LOL":
 		await message.channel.send("https://thumbs.gfycat.com/DefinitiveAdeptAquaticleech-size_restricted.gif")
 
-client.run('Token')
+
+@client.command()
+@commands.has_any_role("DS admin")
+async def ban (ctx, member:discord.User=None, reason =None):
+    if member == None or member == ctx.message.author:
+        await ctx.channel.send("You cannot ban yourself")
+        return
+    if reason == None:
+        reason = "For being a jerk!"
+    message = f"You have been banned from {ctx.guild.name} for {reason}"
+    await member.send(message)
+    # await ctx.guild.ban(member, reason=reason)
+    await ctx.channel.send(f"{member} is banned!")
+
+client.run('NjIzOTMxNDQxOTM1NTQ4NDE2.Xbg83A.W0X3m_VQoQ6tL2t1Jf_OwA2uc5I')
 client = MyClient()
