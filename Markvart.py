@@ -9,7 +9,7 @@ async def on_message(message):
 	if message.content.find("dafuq") != -1:
 		await message.channel.send("https://thumbs.gfycat.com/AcidicFlickeringCobra-small.gif")
 	elif message.content == "!users":
-		await message.channel.send(f"""# of Members: {id.member_count}""")
+		await message.channel.send(f"""Počet členů: {id.member_count}""")
 	elif message.content == "!pozvanka":
 		await message.channel.send("https://discord.gg/jxYaSJj!")
 	elif message.content == "facepalm":
@@ -17,6 +17,17 @@ async def on_message(message):
 	elif message.content == "LOL":
 		await message.channel.send("https://thumbs.gfycat.com/DefinitiveAdeptAquaticleech-size_restricted.gif")
 
+# idle status
+@is_admin
+async def idle(client, message, parameter):
+    await client.change_presence(status=discord.Status.idle,
+                                 activity=discord.Game(name='with live wires'),
+                                 afk=True)
+
+@bot.event
+async def on_member_join(member):
+    role = discord.utils.get(member.server.roles, id="377865260377571339")
+    await bot.add_roles(member, role)
 
 @client.command()
 @commands.has_any_role("DS admin")
