@@ -42,5 +42,5 @@ async def ban (ctx, member:discord.User=None, reason =None):
     # await ctx.guild.ban(member, reason=reason)
     await ctx.channel.send(f"{member} is banned!")
 
-client.run('NjIzOTMxNDQxOTM1NTQ4NDE2.Xbg83A.W0X3m_VQoQ6tL2t1Jf_OwA2uc5I')
+client.run(token)
 client = MyClient()
